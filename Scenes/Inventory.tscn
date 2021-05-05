@@ -1,0 +1,227 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Textures/Objects/eq.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Player/player_idle.png" type="Texture" id=2]
+[ext_resource path="res://Textures/Objects/sn_ammo.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Objects/mg_ammo.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Objects/kit.png" type="Texture" id=5]
+[ext_resource path="res://Textures/Objects/plus.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Font/font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Scripts/Inventory.gd" type="Script" id=8]
+[ext_resource path="res://Textures/Objects/plus_hover.png" type="Texture" id=9]
+[ext_resource path="res://Textures/Objects/plus_press.png" type="Texture" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Inventory" type="Control"]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -80.0
+margin_top = -45.0
+margin_right = 80.0
+margin_bottom = 45.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gun_ammo" type="Sprite" parent="."]
+position = Vector2( -26.839, -4.82179 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="kit" type="Sprite" parent="."]
+position = Vector2( -54.7791, 19 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="mg_ammo" type="Sprite" parent="."]
+position = Vector2( -26.8088, -29.2567 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="sn_ammo" type="Sprite" parent="."]
+position = Vector2( -26.9149, 22.1217 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="Player_sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -52.0932, -9.23175 )
+scale = Vector2( 2.98378, 3.07166 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="gun_up" type="TextureButton" parent="."]
+margin_top = -33.805
+margin_right = 16.0
+margin_bottom = -17.805
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mg_up" type="TextureButton" parent="."]
+margin_top = -9.23175
+margin_right = 16.0
+margin_bottom = 6.76825
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sn_up" type="TextureButton" parent="."]
+margin_top = 15.3415
+margin_right = 16.0
+margin_bottom = 31.3415
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hp" type="Label" parent="."]
+margin_left = -52.0932
+margin_top = 22.3659
+margin_right = -28.0932
+margin_bottom = 53.3659
+custom_fonts/font = ExtResource( 7 )
+text = "10
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cash" type="Label" parent="."]
+margin_left = 52.497
+margin_top = -41.2567
+margin_right = 95.497
+margin_bottom = -10.2567
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.145098, 1, 0.0980392, 1 )
+text = "10$
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gun_num" type="Label" parent="."]
+margin_left = -25.9382
+margin_top = -26.2317
+margin_right = 9.06183
+margin_bottom = -9.23175
+custom_fonts/font = ExtResource( 7 )
+text = "inf"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mg_num" type="Label" parent="."]
+margin_left = -25.9382
+margin_top = -2.30962
+margin_right = 14.0618
+margin_bottom = 11.6904
+custom_fonts/font = ExtResource( 7 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sn_num" type="Label" parent="."]
+margin_left = -27.4032
+margin_top = 24.8601
+margin_right = 12.5968
+margin_bottom = 38.8601
+custom_fonts/font = ExtResource( 7 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gun_dmg" type="Label" parent="."]
+margin_left = 30.9157
+margin_top = -29.1618
+margin_right = 70.9157
+margin_bottom = -15.1618
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Dmg"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mg_dmg" type="Label" parent="."]
+margin_left = 30.9157
+margin_top = -2.30962
+margin_right = 70.9157
+margin_bottom = 11.6904
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Dmg"
+
+[node name="sn_dmg" type="Label" parent="."]
+margin_left = 30.9157
+margin_top = 22.3659
+margin_right = 70.9157
+margin_bottom = 36.3659
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "Dmg"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gun_price" type="Label" parent="."]
+margin_left = 9.06183
+margin_top = -23.79
+margin_right = 29.0618
+margin_bottom = -9.78998
+custom_fonts/font = ExtResource( 7 )
+text = "1$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mg_price" type="Label" parent="."]
+margin_left = 9.06183
+margin_right = 29.0618
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 7 )
+text = "1$"
+
+[node name="sn_price" type="Label" parent="."]
+margin_left = 9.06183
+margin_top = 24.8601
+margin_right = 49.0618
+margin_bottom = 38.8601
+custom_fonts/font = ExtResource( 7 )
+text = "1$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="gun_up" to="." method="_on_gun_up_pressed"]
+[connection signal="pressed" from="mg_up" to="." method="_on_mg_up_pressed"]
+[connection signal="pressed" from="sn_up" to="." method="_on_sn_up_pressed"]

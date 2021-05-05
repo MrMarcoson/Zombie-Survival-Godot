@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 3.59
+flag_disable_z = true
+spread = 20.0
+flatness = 1.0
+gravity = Vector3( 0, 20, 0 )
+initial_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 1, 0.0313726, 0.0313726, 1 )
+
+[node name="Blood" type="Particles2D"]
+amount = 1
+randomness = 1.0
+process_material = SubResource( 1 )

@@ -1,0 +1,100 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Textures/Player/player_walk.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Textures/Player/gun.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Weapon.gd" type="Script" id=4]
+[ext_resource path="res://Textures/Player/Flashlight.png" type="Texture" id=5]
+[ext_resource path="res://Textures/Player/player_idle.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/gunshot.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/hurt.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/reload.wav" type="AudioStream" id=9]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.53214
+height = 6.59396
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "walk",
+"speed": 3.0
+} ]
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 8 )
+animation = "walk"
+frame = 2
+playing = true
+
+[node name="Weapon" type="Sprite" parent="."]
+position = Vector2( 0, 1.76726 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Flashlight" type="Light2D" parent="Weapon"]
+position = Vector2( 164.155, 0.3415 )
+scale = Vector2( 0.969386, 1.2421 )
+texture = ExtResource( 5 )
+shadow_enabled = true
+
+[node name="Gun_sound" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource( 7 )
+volume_db = -30.0
+
+[node name="Reload_sound" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource( 9 )
+volume_db = -30.0
+
+[node name="Reload" type="Timer" parent="Weapon"]
+wait_time = 0.7
+one_shot = true
+
+[node name="Flashing" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Hurt_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.0
+[connection signal="timeout" from="Weapon/Reload" to="." method="_on_Reload_timeout"]
+[connection signal="timeout" from="Flashing" to="." method="_on_Flashing_timeout"]
